@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class sussyBaka : MonoBehaviour
+{
+    public GameObject cube;
+    public GameObject newObject;
+    public GameObject newObject2;
+    public Transform newLocation;
+    public float timer = 5.0f;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Rotate(100 * Time.deltaTime, 0, 0);
+
+        timer-= Time.deltaTime;
+        if (timer> 0)
+            transform.position += Vector3.forward * Time.deltaTime;
+        else if (timer > -5.0f)
+            transform.position += Vector3.back * Time.deltaTime;
+        timer += Time.deltaTime;
+    }
+
+    private void OnMouseDown()
+    {
+        Instantiate(newObject, transform.position, transform.rotation);
+        Instantiate(newObject2, newLocation.position, newLocation.rotation);
+        Destroy(cube.gameObject);
+        Debug.Log("Cube was destroyed");
+    }
+}
